@@ -36,7 +36,7 @@ export default function cache<T>(key: string, expires: Callback<T> | Date | numb
                 // Set cache in Redis.
                 client.set(key, JSON.stringify(cacheable));
                 // Set key expiration if provided.
-                expires && client.expireat(key, expires as number);
+                if (expires) client.expireat(key, expires as number);
             }
         ));
     });
