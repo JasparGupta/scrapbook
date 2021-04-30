@@ -1,12 +1,11 @@
-import Page from '@components/Page';
-import cache from '@lib/cache';
-import { tap } from '@lib/utils';
+import Page from '@components/page';
 import { GetServerSideProps } from 'next';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 
-const Home = () => {
+interface Props {
+    //
+}
+
+const HomePage = () => {
     return (
         <Page title={process.env.NEXT_PUBLIC_APP_NAME}>
 
@@ -14,8 +13,8 @@ const Home = () => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
     return {props: {}};
 };
 
-export default Home;
+export default HomePage;
