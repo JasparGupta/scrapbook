@@ -1,3 +1,3 @@
 export default function useTitle(title: string): void {
-    typeof window !== 'undefined' && void (window.document.title = `Scrapbook | ${title}`);
+    if (typeof window !== 'undefined') window.document.title = `Scrapbook | ${title}`;
 }
