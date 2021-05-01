@@ -11,7 +11,7 @@ interface Event {
 
 const Event: FC<Event> = ({description, title}) => {
     return (
-        <Card>
+        <Card className="border-right-0">
             <Card.Header>
                 {title}
             </Card.Header>

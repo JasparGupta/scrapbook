@@ -11,7 +11,7 @@ interface Props {
 
 const Story: FC<Props> = ({events, title}) => {
     return (
-        <Card>
+        <Card className="border-0 shadow">
             <Card.Header>
                 <p className="lead mb-0">{title}</p>
             </Card.Header>
