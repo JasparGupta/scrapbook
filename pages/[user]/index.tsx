@@ -33,12 +33,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
             events: [
                 {
                     description: faker.lorem.paragraph(),
-                    id: 'a',
+                    id: faker.datatype.uuid(),
                     title: faker.lorem.sentence(),
                     type: EventType.PHOTO,
                 }
             ],
-            id: 'a',
+            id: faker.datatype.uuid(),
             title: 'My First Story',
         }
     ];
