@@ -1,9 +1,10 @@
 import Page from '@components/page';
 import Story from '@components/story';
 import { useTitle } from '@lib/hooks';
+import sequelize from '@lib/mysql';
 import { EventType, Story as StoryType, User } from '@lib/types';
 import { fullName } from '@lib/utils/user';
-import * as faker from 'faker';
+import faker from 'faker';
 import { GetServerSideProps } from 'next';
 import { FC } from 'react';
 
@@ -28,6 +29,13 @@ const UserPage: FC<Props> = ({stories, user}) => {
 export default UserPage;
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Successfully authenticated');
+    } catch (error) {
+        console.error(error);
+    }
+    
     const stories: StoryType[] = [
         {
             events: [
