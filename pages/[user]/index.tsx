@@ -43,8 +43,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
         }
     ];
     const user: User = {
-        first_name: 'Jaspar',
-        last_name: 'Gupta',
+        email: faker.internet.email(),
+        first_name: faker.name.firstName(),
+        last_name: faker.name.lastName(),
+        password: faker.datatype.string(12),
     };
 
     return {
