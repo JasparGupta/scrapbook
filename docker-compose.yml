@@ -1,6 +1,21 @@
 version: "3.8"
 
 services:
+  mysql:
+    image: library/mysql:8
+    container_name: scrapbook_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=scrapbook
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    networks:
+      - scrapbook
+    ports:
+      - 3306:3306
+    volumes:
+      - ./storage/mysql:/var/lib/mysql:delegated
+
   redis:
     image: library/redis:6
     command: redis-server
@@ -12,7 +27,7 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - ./storage/redis:/data
+      - ./storage/redis:/data:delegated
 
 networks:
   scrapbook:
