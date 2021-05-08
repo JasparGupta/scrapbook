@@ -1,6 +1,21 @@
 version: "3.8"
 
 services:
+  application:
+    build:
+      context: .
+      dockerfile: infrastructure/application.Dockerfile
+    container_name: scrapbook
+    env_file:
+      - .env
+    networks:
+      - scrapbook
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app:cached
+    entrypoint: [ "npm", "run", "dev" ]
+
   mysql:
     image: library/mysql:8
     container_name: scrapbook_mysql
