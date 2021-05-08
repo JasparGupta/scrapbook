@@ -5,7 +5,7 @@ import { change } from '@components/forms/ducks/actions';
 import { faSignInAlt, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
-import { ChangeEventHandler, FC, FormEventHandler, useReducer } from 'react';
+import { ChangeEventHandler, FC, FormEventHandler, useCallback, useReducer } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -16,14 +16,14 @@ interface Props {
 const AuthenticateForm: FC<Props> = () => {
     const router = useRouter();
     const [{data, ...state}, dispatch] = useReducer(reducer, {...initialState});
-    const handleChange: ChangeEventHandler<HTMLInputElement> = ({currentTarget: target}) => {
+    const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(({currentTarget: target}) => {
         dispatch(change(target));
-    };
-    const handleSubmit: FormEventHandler = async (event) => {
+    }, []);
+    const handleSubmit = useCallback<FormEventHandler>(async event => {
         event.preventDefault();
         await authenticate(data)(dispatch);
-        router.push(router.query.redirect as string);
-    };
+        void router.push(router.query.redirect as string);
+    }, []);
 
     return (
         <Form onSubmit={handleSubmit}>
