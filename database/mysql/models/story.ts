@@ -1,10 +1,12 @@
 import sequelize from '../index';
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 
-const Story = sequelize.define('Story', {
+export interface Attributes {
+    title: string,
+}
+
+const Story = sequelize.define<Model, Attributes>('Story', {
     title: DataTypes.STRING
 });
-
-Story.sync({force: process.env.NODE_ENV === 'development'});
 
 export default Story;

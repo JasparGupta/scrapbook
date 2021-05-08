@@ -1,6 +1,6 @@
-import Event from './event';
-import Story from './story';
-import User from './user';
+import Event from '@database/mysql/models/event';
+import Story from '@database/mysql/models/story';
+import User from '@database/mysql/models/user';
 
 User.hasMany(Story);
 User.hasMany(Event);
@@ -11,4 +11,4 @@ Story.hasMany(Event);
 Event.belongsTo(Story);
 Event.belongsTo(User);
 
-export { Event, Story, User };
+export { User, Story, Event };

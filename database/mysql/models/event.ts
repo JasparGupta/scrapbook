@@ -1,7 +1,13 @@
 import sequelize from '../index';
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 
-const Event = sequelize.define('Event', {
+export interface Attributes {
+    description: string,
+    title: string,
+    type: number,
+}
+
+const Event = sequelize.define<Model, Attributes>('Event', {
     description: DataTypes.TEXT,
     title: DataTypes.STRING,
     type: {
@@ -9,7 +15,5 @@ const Event = sequelize.define('Event', {
         allowNull: false,
     },
 });
-
-Event.sync({force: process.env.NODE_ENV === 'development'});
 
 export default Event;

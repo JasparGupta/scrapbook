@@ -1,4 +1,4 @@
-import connection from '../index';
+import connection from '@database/mysql';
 import { DataTypes, Model } from 'sequelize';
 
 export interface Attributes {
@@ -27,7 +27,5 @@ const User = connection.define<Model, Attributes>('User', {
         allowNull: false,
     }
 });
-
-User.sync({force: process.env.NODE_ENV === 'development'});
 
 export default User;
