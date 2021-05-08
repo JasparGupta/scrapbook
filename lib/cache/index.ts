@@ -30,14 +30,11 @@ export default function cache<T>(key: string, expires: Callback<T> | Date | numb
         if (result) return;
 
         // Resolve with result of callback.
-        resolve(tap(
-            await value<T>(callback),
-            cacheable => {
-                // Set cache in Redis.
-                client.set(key, JSON.stringify(cacheable));
-                // Set key expiration if provided.
-                if (expires) client.expireat(key, expires as number);
-            }
-        ));
+        resolve(tap(await value<T>(callback), cacheable => {
+            // Set cache in Redis.
+            client.set(key, JSON.stringify(cacheable));
+            // Set key expiration if provided.
+            if (expires) client.expireat(key, expires as number);
+        }));
     });
 }
