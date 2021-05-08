@@ -1,4 +1,4 @@
-import client from '@lib/redis';
+import client from '@lib/../../database/redis';
 import { tap, value } from '@lib/utils';
 import md5 from 'md5';
 
