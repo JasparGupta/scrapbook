@@ -1,4 +1,4 @@
-import sequelize from '@lib/mysql';
+import sequelize from '../index';
 import { DataTypes } from 'sequelize';
 
 const Event = sequelize.define('Event', {

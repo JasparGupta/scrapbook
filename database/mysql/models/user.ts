@@ -1,17 +1,24 @@
-import connection from '@lib/mysql';
-import { DataTypes } from 'sequelize';
+import connection from '../index';
+import { DataTypes, Model } from 'sequelize';
 
-const User = connection.define('User', {
+export interface Attributes {
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string,
+}
+
+const User = connection.define<Model, Attributes>('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {isEmail: true}
     },
-    first_name: {
+    firstName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    last_name: {
+    lastName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
