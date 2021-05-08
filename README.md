@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, add app.scrapbook.local to your hosts file.
+First, add `app.scrapbook.local` to your `hosts` file.
 
 Next, run the development server:
 
