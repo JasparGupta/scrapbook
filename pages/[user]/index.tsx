@@ -1,7 +1,7 @@
 import Page from '@components/page';
 import Story from '@components/story';
 import { useTitle } from '@lib/hooks';
-import sequelize from '@lib/mysql';
+import sequelize from '@lib/../../database/mysql';
 import { EventType, Story as StoryType, User } from '@lib/types';
 import { fullName } from '@lib/utils/user';
 import faker from 'faker';
