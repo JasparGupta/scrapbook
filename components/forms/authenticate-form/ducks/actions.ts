@@ -9,7 +9,23 @@ export function authenticate(data: Data) {
         dispatch(submit());
 
         try {
-            // TODO: Authenticate.
+            const response = await fetch(`/api/auth/signin/credentials`, {
+                method: 'post',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            console.log('RESPONSE', response);
+
+            if (!response.ok) {
+                throw response;
+            }
+
+            // console.log('RESPONSE', await response.json());
+
             dispatch(authenticated());
         } catch (e) {
             dispatch(error('Failed to authenticate'));

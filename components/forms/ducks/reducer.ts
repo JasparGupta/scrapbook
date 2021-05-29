@@ -9,7 +9,7 @@ const reducer = <S extends State, A extends AnyAction = AnyAction>(reducer: Redu
             case Type.CHANGE:
                 return {...state, data: {...state.data, [payload.name]: payload.value}};
             case Type.ERROR:
-                return {...state, error: payload};
+                return {...state, error: payload, submitting: false};
             case Type.SUBMIT:
                 return {...state, error: null, submitting: true};
         }

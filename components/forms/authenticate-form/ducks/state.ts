@@ -1,6 +1,6 @@
 import { initialState as formInitialState, State as FormState } from '../../ducks/state';
 
-export interface Data {
+export interface Data extends Record<string, string> {
     email: string,
     password: string,
 }

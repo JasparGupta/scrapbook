@@ -1,32 +1,26 @@
-import { authenticate } from '@components/forms/authenticate-form/ducks/actions';
 import reducer from '@components/forms/authenticate-form/ducks/reducer';
 import { initialState } from '@components/forms/authenticate-form/ducks/state';
 import { change } from '@components/forms/ducks/actions';
 import { faSignInAlt, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRouter } from 'next/router';
-import { ChangeEventHandler, FC, FormEventHandler, useCallback, useReducer } from 'react';
+import { ChangeEventHandler, FC, useCallback, useReducer } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 interface Props {
-    //
+    csrfToken: string,
 }
 
-const AuthenticateForm: FC<Props> = () => {
-    const router = useRouter();
-    const [{data, ...state}, dispatch] = useReducer(reducer, {...initialState});
-    const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(({currentTarget: target}) => {
+const AuthenticateForm: FC<Props> = ({ csrfToken }) => {
+    const [{ data, ...state }, dispatch] = useReducer(reducer, { ...initialState });
+    const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(({ currentTarget: target }) => {
         dispatch(change(target));
-    }, []);
-    const handleSubmit = useCallback<FormEventHandler>(async event => {
-        event.preventDefault();
-        await authenticate(data)(dispatch);
-        void router.push(router.query.redirect as string);
     }, []);
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form method="post" action="/api/auth/callback/credentials">
+            <input type="hidden" name="csrfToken" value={csrfToken} />
+
             <Form.Group controlId="email">
                 <Form.Label>
                     Email

@@ -1,13 +1,13 @@
 import { User } from '@database/mysql/models';
 import { Attributes } from '@database/mysql/models/user';
-import * as faker from 'faker';
+import hash from '@lib/auth/hash';
 
 export default async function user(): Promise<void> {
     const attributes: Attributes = {
-        email: faker.internet.email(),
+        email: 'jaspar.gupta@gmail.com',
         firstName: 'Jaspar',
         lastName: 'Gupta',
-        password: faker.internet.password(),
+        password: hash('admin'),
     };
 
     void await User.create(attributes);
